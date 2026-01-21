@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Resultado } from '../interfaces/pokeapi';
 
 @Injectable({
   providedIn: 'root',
@@ -7,12 +8,18 @@ export class Pokemon {
   
   constructor() { }
 
-  getByPage() {
-    fetch("https://pokeapi.co/api/v2/pokemon/?limit=20&offset=20")
+  async getByPage(page:number, size: number = 40):Promise<Resultado[]> {
+    const offset =size*(page-1);
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=20`)
+    const resJson = await res.json();
+    if(resJson.results.length > 0) return resJson.results;
+    return [];
   }
 
-  getById() {
-    //https://pokeapi.co/api/v2/pokemon/
+  async getById(id:string) {
+    const res = await fetch('https://pokeapi.co/api/v2/pokemon/${id}')
+    const resJson = await res.json();
+    console.log(resJson);
   }
 
   getDescripcion() {
