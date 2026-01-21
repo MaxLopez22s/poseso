@@ -30,6 +30,7 @@
 
 app-foto-pokemon{
     margin-left: 100px;
+    z-index: 2;
 }
 
 #tarjetasContainer{
@@ -38,4 +39,14 @@ app-foto-pokemon{
     gap: 5px;
     max-height: 100%;
     overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+#spinner{
+    max-height: 50px;
+}
+
+app-detalle{
+    position: absolute;
+    z-index: 1;
 }

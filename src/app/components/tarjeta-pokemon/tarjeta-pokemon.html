@@ -1,6 +1,6 @@
-<div id="container">
-    <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back{{id}}.png' alt="" id="flecha">
-    <div id="tarjeta">
+<div id="container" [ngClass]="{selecionado: selecionado}">
+    <img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{id}}.png' alt="" id="flecha" *ngIf="selecionado">
+    <div id="tarjeta" (click)="clickeado.emit(id)">
         <div id="circulo"></div>
         <img src="" alt="">
         <span>No. {{id}}</span>

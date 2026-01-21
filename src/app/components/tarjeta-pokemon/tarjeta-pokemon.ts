@@ -1,18 +1,18 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { Resultado } from '../../interfaces/pokeapi';
-import { NgIf, TitleCasePipe } from '@angular/common';
-import { Pokemon } from '../../services/pokemon';
+import { NgIf, TitleCasePipe, NgClass } from '@angular/common';
+import { PokemonService } from '../../services/pokemonService';
 
 @Component({
   selector: 'app-tarjeta-pokemon',
   standalone: true,
-  imports: [NgIf, TitleCasePipe],
+  imports: [NgIf, TitleCasePipe, NgClass],
   templateUrl: './tarjeta-pokemon.html',
   styleUrl: './tarjeta-pokemon.scss',
 })
 export class TarjetaPokemon implements OnChanges {
 
-  constructor(private Pokemon: Pokemon) { }
+  constructor(private Pokemon: PokemonService) { }
 
   ngOnChanges(): void {
     this.extraerInformacion();
@@ -21,6 +21,8 @@ export class TarjetaPokemon implements OnChanges {
 
 
   @Input() data?: Resultado;
+  @Input() selecionado: boolean = false;
+  @Output() clickeado = new EventEmitter<string>();
   id:string = '0';
 
   extraerInformacion() {
